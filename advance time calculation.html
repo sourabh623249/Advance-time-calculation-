@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Time Calculator</title>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f7f9fc;
+            margin: 0;
+        }
+        .container {
+            background: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+        }
+        h2 {
+            margin-bottom: 20px;
+            font-size: 1.6em;
+            color: #333;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #777;
+            font-size: 14px;
+        }
+        input {
+            width: calc(50% - 10px);
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 2px solid #e4e7eb;
+            border-radius: 8px;
+            font-size: 16px;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+        input:focus {
+            border-color: #007bff;
+        }
+        .button {
+            width: 100%;
+            padding: 12px;
+            background-color: #007bff;
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background-color 0.3s ease;
+        }
+        .button:hover {
+            background-color: #0056b3;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #333;
+            font-weight: bold;
+        }
+        .footer {
+            margin-top: 15px;
+            font-size: 14px;
+            color: #777;
+        }
+        .footer a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        .footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Advanced Time Calculator</h2>
+
+        <label for="startHour">Start Hour:</label>
+        <input type="number" id="startHour" min="0" max="23" placeholder="HH" required>
+
+        <label for="startMinute">Start Minute:</label>
+        <input type="number" id="startMinute" min="0" max="59" placeholder="MM" required>
+
+        <label for="endHour">End Hour:</label>
+        <input type="number" id="endHour" min="0" max="23" placeholder="HH" required>
+
+        <label for="endMinute">End Minute:</label>
+        <input type="number" id="endMinute" min="0" max="59" placeholder="MM" required>
+
+        <button class="button" onclick="calculateTimeDifference()">Calculate Difference</button>
+
+        <div class="result" id="result"></div>
+
+        <div class="footer">Created by <a href="#">Sourabh</a></div>
+    </div>
+
+    <script>
+        function calculateTimeDifference() {
+            let startHour = parseInt(document.getElementById("startHour").value);
+            let startMinute = parseInt(document.getElementById("startMinute").value);
+            let endHour = parseInt(document.getElementById("endHour").value);
+            let endMinute = parseInt(document.getElementById("endMinute").value);
+
+            if (isNaN(startHour) || isNaN(startMinute) || isNaN(endHour) || isNaN(endMinute)) {
+                document.getElementById("result").innerText = "Please fill in all fields.";
+                return;
+            }
+
+            // Calculate time in minutes
+            let startTimeInMinutes = (startHour * 60) + startMinute;
+            let endTimeInMinutes = (endHour * 60) + endMinute;
+
+            // Calculate the difference
+            let diffInMinutes = endTimeInMinutes - startTimeInMinutes;
+
+            if (diffInMinutes < 0) {
+                diffInMinutes += 24 * 60; // Account for time passing over midnight
+            }
+
+            let hours = Math.floor(diffInMinutes / 60);
+            let minutes = diffInMinutes % 60;
+
+            document.getElementById("result").innerText = `Time calculation: ${hours} hour(s) and ${minutes} minute(s)`;
+            
+        }
+    </script>
+
+</body>
+</html>
+by
